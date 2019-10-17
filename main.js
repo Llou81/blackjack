@@ -72,10 +72,18 @@ const dealCards = () => {
     playerCards = [shuffledDeck.shift(), shuffledDeck.shift()];
     dealerCards = [shuffledDeck.shift(), shuffledDeck.shift()];
 
+    makeVisible(playerCard[0]);
     playerCard[0].setAttribute("src", `./pictures/${playerCards[0].name}${playerCards[0].suit}.png`);
-    playerCard[1].setAttribute("src", `./pictures/${playerCards[1].name}${playerCards[1].suit}.png`);
+    playerCard[0].classList.add('animated', 'fadeInDown', 'delay-hs');
+    makeVisible(dealerCard[0]);
     dealerCard[0].setAttribute("src", `./pictures/${dealerCards[0].name}${dealerCards[0].suit}.png`);
+    dealerCard[0].classList.add('animated', 'fadeInUp', 'delay-1s');
+    makeVisible(playerCard[1]);
+    playerCard[1].setAttribute("src", `./pictures/${playerCards[1].name}${playerCards[1].suit}.png`);
+    playerCard[1].classList.add('animated', 'fadeInDown', 'delay-1hs');
+    makeVisible(dealerCard[1]);
     dealerCard[1].setAttribute("src", `./pictures/red_back.png`);
+    dealerCard[1].classList.add('animated', 'fadeInUp', 'delay-2s');
 
     sumPlayer = calculateSum(playerCards);
     sumDealer = calculateSum(dealerCards);
@@ -118,6 +126,15 @@ const hitCard = (array1, array2) => {
     valueSum(array2);
 }
 
+const makeVisible = (element) => {
+    element.style.display = "inline-block";
+}
+
+const showResult = (element) => {
+    result.style.visibility = "visible";
+    result.classList.add('animated', 'bounceIn', 'delay-2s', 'slow');
+}
+
 const calculateSum = (array) => {
     let sum = 0;
     for (item of array) {
@@ -150,6 +167,7 @@ const checkBlackJack = (sum) => {
 }
 
 const endGame = (array) => {
+
     for (item of array) {
         let i = array.indexOf(item);
         dealerCard[i].setAttribute("src", `./pictures/${array[i].name}${array[i].suit}.png`);
@@ -172,17 +190,17 @@ const dealerAI = (array1, array2) => {
 }
 
 const playerWins = () => {
-    result.style.visibility = "visible";
+    showResult(result);
     result.innerHTML = "Player wins";
 }
 
 const dealerWins = () => {
-    result.style.visibility = "visible";
+    showResult(result);
     result.innerHTML = "Dealer wins";
 }
 
 const push = () => {
-    result.style.visibility = "visible";
+    showResult(result);
     result.innerHTML = "Push";
 }
 
