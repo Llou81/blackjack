@@ -57,9 +57,8 @@ button {
 }
 
 #result {
-	visibility: hidden;
 	margin: 10px;
-	padding: 0;
+	padding: 10px;
 	color: yellow;
 }
 

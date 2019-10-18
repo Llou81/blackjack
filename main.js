@@ -58,6 +58,7 @@ const shuffleDeck = () => {
 const dealCards = () => {
     dealDiv.style.display = "none";
     result.style.visibility = "hidden";
+    result.classList.remove('bounceIn', 'delay-2s', 'slow');
     for (card of hiddenCard) {
         card.style.display = "none";
     }
@@ -132,7 +133,7 @@ const makeVisible = (element) => {
 
 const showResult = (element) => {
     result.style.visibility = "visible";
-    result.classList.add('animated', 'bounceIn', 'delay-2s', 'slow');
+    result.classList.add('animated', 'bounceIn', 'delay-1hs', 'slow');
 }
 
 const calculateSum = (array) => {
@@ -178,9 +179,15 @@ const endGame = (array) => {
     cardValue[0].innerHTML = `${sumDealer}`;
     cardValue[0].style.visibility = "visible";
 
+    gameResult(dealerCards, playerCards);
+
     dealDiv.style.display = "block";
     hitButton.style.display = "none";
     stayButton.style.display = "none";
+    playerCard[0].classList.remove('animated', 'fadeInDown', 'delay-hs');
+    dealerCard[0].classList.remove('animated', 'fadeInUp', 'delay-1s');
+    playerCard[1].classList.remove('animated', 'fadeInDown', 'delay-1hs');
+    dealerCard[1].classList.remove('animated', 'fadeInUp', 'delay-2s');
 }
 
 const dealerAI = (array1, array2) => {
