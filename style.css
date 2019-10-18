@@ -59,20 +59,19 @@ button {
 }
 
 #result {
-	font-size: 4em;
+	font-size: 3.5em;
 	margin: 10px;
-	padding: 10px;
 	color: yellow;
 }
 
 #res_container {
 	display: flex;
-	height: 120px;
+	height: 100px;
 	align-items: center;
 }
 
 .player_container {
-	height: 170px;
+	height: 150px;
 	align-items: center;
 }
 
