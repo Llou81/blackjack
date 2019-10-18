@@ -3593,14 +3593,29 @@
   animation-delay: 2s;
 }
 
+.animated.delay-2hs {
+  -webkit-animation-delay: 2.5s;
+  animation-delay: 2.5s;
+}
+
 .animated.delay-3s {
   -webkit-animation-delay: 3s;
   animation-delay: 3s;
 }
 
+.animated.delay-3hs {
+  -webkit-animation-delay: 3.5s;
+  animation-delay: 3.5s;
+}
+
 .animated.delay-4s {
   -webkit-animation-delay: 4s;
   animation-delay: 4s;
+}
+
+.animated.delay-4hs {
+  -webkit-animation-delay: 4.5s;
+  animation-delay: 4.5s;
 }
 
 .animated.delay-5s {

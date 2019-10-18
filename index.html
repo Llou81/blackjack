@@ -36,28 +36,37 @@
         </div>
         <div id="game">
 
-            <h2>Dealer</h2>
+	<h2>Dealer</h2>
+        <h2 class="card_value">0</h2>
+
+            <div class="player_container">
+
+                <div>
+                    <img class="dealer_card hidden_card" alt="Players Card 1">
+                    <img class="dealer_card hidden_card" alt="Dealers Card 2">
+                    <img class="dealer_card hidden_card animated fadeInLeft delay-hs" alt="Dealers Card 3">
+                    <img class="dealer_card hidden_card animated fadeInLeft delay-1s" alt="Dealers Card 4">
+                    <img class="dealer_card hidden_card animated fadeInLeft delay-1hs" alt="Dealers Card 5">
+               </div>
+	    </div>
+
+	    <div id="res_container">
+	        <h1 id="result"></h1>
+	    </div>
+
+	    <h2>Player</h2>
             <h2 class="card_value">0</h2>
 
-            <div>
-                <img class="dealer_card hidden_card" alt="Players Card 1">
-                <img class="dealer_card hidden_card" alt="Dealers Card 2">
-                <img class="dealer_card hidden_card animated fadeInLeft delay-hs" alt="Dealers Card 3">
-                <img class="dealer_card hidden_card animated fadeInLeft delay-1s" alt="Dealers Card 4">
-                <img class="dealer_card hidden_card animated fadeInLeft delay-1hs" alt="Dealers Card 5">
-            </div>
+	    <div class="player_container">
+                <div>
+                    <img class="player_card hidden_card" alt="Players Card 1">
+                    <img class="player_card hidden_card" alt="Players Card 2">
+                    <img class="player_card hidden_card animated fadeInLeft" alt="Players Card 3">
+                    <img class="player_card hidden_card animated fadeInLeft" alt="Players Card 4">
+                    <img class="player_card hidden_card animated fadeInLeft" alt="Players Card 5">
+                </div>
 
-	    <h1 id="result"></h1>
-            <h2>Player</h2>
-            <h2 class="card_value">0</h2>
-
-            <div>
-                <img class="player_card hidden_card" alt="Players Card 1">
-                <img class="player_card hidden_card" alt="Players Card 2">
-                <img class="player_card hidden_card animated fadeInLeft" alt="Players Card 3">
-                <img class="player_card hidden_card animated fadeInLeft" alt="Players Card 4">
-                <img class="player_card hidden_card animated fadeInLeft" alt="Players Card 5">
-            </div>
+   	    </div>
 
             <div>
                 <button id="hit_button">Hit!</button>

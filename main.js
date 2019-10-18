@@ -58,7 +58,8 @@ const shuffleDeck = () => {
 const dealCards = () => {
     dealDiv.style.display = "none";
     result.style.visibility = "hidden";
-    result.classList.remove('bounceIn', 'delay-2s', 'slow');
+    result.classList.remove('bounceIn', 'delay-1hs', 'slow');
+    cardValue[0].classList.remove('animated', 'fadeIn');
     for (card of hiddenCard) {
         card.style.display = "none";
     }
@@ -89,7 +90,9 @@ const dealCards = () => {
     sumPlayer = calculateSum(playerCards);
     sumDealer = calculateSum(dealerCards);
     cardValue[1].innerHTML = `${sumPlayer}`;
-    cardValue[1].style.visibility = "visible";
+    cardValue[1].classList.add('animated', 'fadeIn', 'delay-2s');
+    makeVisible(cardValue[1]);
+
 
     if(checkBlackJack(sumPlayer) || checkBlackJack(sumDealer)) {
         endGame(dealerCards);
@@ -128,12 +131,13 @@ const hitCard = (array1, array2) => {
 }
 
 const makeVisible = (element) => {
+    element.style.visibility = "visible";
     element.style.display = "inline-block";
 }
 
 const showResult = (element) => {
     result.style.visibility = "visible";
-    result.classList.add('animated', 'bounceIn', 'delay-1hs', 'slow');
+    result.classList.add('animated', 'bounceIn', 'delay-2s', 'slow');
 }
 
 const calculateSum = (array) => {
@@ -177,7 +181,6 @@ const endGame = (array) => {
     
     sumDealer = valueSum(array);
     cardValue[0].innerHTML = `${sumDealer}`;
-    cardValue[0].style.visibility = "visible";
 
     gameResult(dealerCards, playerCards);
 
@@ -188,6 +191,8 @@ const endGame = (array) => {
     dealerCard[0].classList.remove('animated', 'fadeInUp', 'delay-1s');
     playerCard[1].classList.remove('animated', 'fadeInDown', 'delay-1hs');
     dealerCard[1].classList.remove('animated', 'fadeInUp', 'delay-2s');
+    
+    cardValue[1].classList.remove('animated', 'fadeIn');
 }
 
 const dealerAI = (array1, array2) => {
@@ -212,6 +217,8 @@ const push = () => {
 }
 
 const gameResult = (array1, array2) => {
+    cardValue[0].classList.add('animated', 'fadeIn', 'delay-1hs');
+    makeVisible(cardValue[0]);
     if (valueSum(array1) > 21 && valueSum(array2) > 21) {
         push();
     } else {
