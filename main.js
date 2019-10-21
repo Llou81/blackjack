@@ -150,25 +150,27 @@ const calculateSum = (array) => {
 
 const valueSum = (array) => {
     let sum = calculateSum(array);
-        
- 	if(sum > 21) {
-            for (item of array) {
-                if(item.name === "A") {
-                    item.value = 1;
-                    sum = calculateSum(array);                
-		}    
+    
+    while(checkBust(sum)) { 
+        for(item of array) {
+            if(item.value === 11 && checkBust(sum)) {
+                item.value = 1;
+                sum = calculateSum(array);
             }
         }
+    }    
+    
     return sum;
 }
 
-const checkBlackJack = (sum) => {
-    if (sum === 21) {
-        return true;
-    } else {
-        return false;
-    }
+const checkBust = (sum) => {
+    if (sum < 22) return false;
+    return true;
+}
 
+const checkBlackJack = (sum) => {
+    if (sum === 21) return true;
+    return false;
 }
 
 const endGame = (array) => {
@@ -191,7 +193,6 @@ const endGame = (array) => {
     dealerCard[0].classList.remove('animated', 'fadeInUp', 'delay-1s');
     playerCard[1].classList.remove('animated', 'fadeInDown', 'delay-1hs');
     dealerCard[1].classList.remove('animated', 'fadeInUp', 'delay-2s');
-    
     cardValue[1].classList.remove('animated', 'fadeIn');
 }
 
