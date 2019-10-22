@@ -22,19 +22,17 @@ const deck = () => {
     let cards = [];
     let value;
     for (name of names) {
-        if(!isNaN(name)) {
-                value = Number(name);
-            }
-            else if (name === "A") {
-                value = 11;
-            }
-            else {
-                value = 10;
-            }
+        if (!isNaN(name)) {
+            value = Number(name);
+        } else if (name === "A") {
+            value = 11;
+        } else {
+            value = 10;
+        }
 
-            for (suit of suits) {
-                cards.push(new Card(name, suit, value))
-            }    
+        for (suit of suits) {
+            cards.push(new Card(name, suit, value))
+        }
     }
     return cards;
 }
@@ -44,7 +42,7 @@ const shuffleDeck = () => {
     let currentPass = shuffled.length;
     let index, temp;
 
-    while(currentPass > 0) {
+    while (currentPass > 0) {
         index = Math.floor(Math.random() * currentPass);
         currentPass--;
 
@@ -55,20 +53,35 @@ const shuffleDeck = () => {
     return shuffled;
 }
 
-const dealCards = () => {
+const dealCardsCss = () => {
     dealDiv.style.display = "none";
     result.style.visibility = "hidden";
     result.classList.remove('bounceIn', 'delay-1hs', 'slow');
     cardValue[0].classList.remove('animated', 'fadeIn');
-    for (card of hiddenCard) {
-        card.style.display = "none";
-    }
-
     cardValue[0].style.visibility = "hidden"
     hitButton.style.display = "inline-block";
     stayButton.style.display = "inline-block";
     history.style.display = "none";
     game.style.display = "grid";
+    for (card of hiddenCard) {
+        card.style.display = "none";
+    }
+}
+
+const endGameCss = () => {
+    dealDiv.style.display = "block";
+    hitButton.style.display = "none";
+    stayButton.style.display = "none";
+    playerCard[0].classList.remove('animated', 'fadeInDown', 'delay-hs');
+    dealerCard[0].classList.remove('animated', 'fadeInUp', 'delay-1s');
+    playerCard[1].classList.remove('animated', 'fadeInDown', 'delay-1hs');
+    dealerCard[1].classList.remove('animated', 'fadeInUp', 'delay-2s');
+    cardValue[1].classList.remove('animated', 'fadeIn');
+}
+
+const dealCards = () => {
+
+    dealCardsCss();
     shuffledDeck = shuffleDeck();
 
     playerCards = [shuffledDeck.shift(), shuffledDeck.shift()];
@@ -94,7 +107,7 @@ const dealCards = () => {
     makeVisible(cardValue[1]);
 
 
-    if(checkBlackJack(sumPlayer) || checkBlackJack(sumDealer)) {
+    if (checkBlackJack(sumPlayer) || checkBlackJack(sumDealer)) {
         endGame(dealerCards);
         gameResult(dealerCards, playerCards);
     }
@@ -108,14 +121,14 @@ hitButton.addEventListener("click", function() {
     playerCard[i].setAttribute("src", `./pictures/${playerCards[i].name}${playerCards[i].suit}.png`);
     playerCard[i].style.display = "inline-block";
 
-    if(sumPlayer > 20) {
+    if (sumPlayer > 20) {
         dealerAI(shuffledDeck, dealerCards);
         endGame(dealerCards);
         gameResult(dealerCards, playerCards);
     }
 });
 
-stayButton.addEventListener("click", function () {
+stayButton.addEventListener("click", function() {
     dealerAI(shuffledDeck, dealerCards);
     endGame(dealerCards);
     gameResult(dealerCards, playerCards);
@@ -150,16 +163,14 @@ const calculateSum = (array) => {
 
 const valueSum = (array) => {
     let sum = calculateSum(array);
-    
-    while(checkBust(sum)) { 
-        for(item of array) {
-            if(item.value === 11 && checkBust(sum)) {
-                item.value = 1;
-                sum = calculateSum(array);
-            }
+
+    for (item of array) {
+        if (item.value === 11 && checkBust(sum)) {
+            item.value = 1;
+            sum = calculateSum(array);
         }
-    }    
-    
+    }
+
     return sum;
 }
 
@@ -178,22 +189,15 @@ const endGame = (array) => {
     for (item of array) {
         let i = array.indexOf(item);
         dealerCard[i].setAttribute("src", `./pictures/${array[i].name}${array[i].suit}.png`);
-        dealerCard[i].style.display = "inline-block";    
+        dealerCard[i].style.display = "inline-block";
     }
-    
+
     sumDealer = valueSum(array);
     cardValue[0].innerHTML = `${sumDealer}`;
 
     gameResult(dealerCards, playerCards);
 
-    dealDiv.style.display = "block";
-    hitButton.style.display = "none";
-    stayButton.style.display = "none";
-    playerCard[0].classList.remove('animated', 'fadeInDown', 'delay-hs');
-    dealerCard[0].classList.remove('animated', 'fadeInUp', 'delay-1s');
-    playerCard[1].classList.remove('animated', 'fadeInDown', 'delay-1hs');
-    dealerCard[1].classList.remove('animated', 'fadeInUp', 'delay-2s');
-    cardValue[1].classList.remove('animated', 'fadeIn');
+    endGameCss();
 }
 
 const dealerAI = (array1, array2) => {
